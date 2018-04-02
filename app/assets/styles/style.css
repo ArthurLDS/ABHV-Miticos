@@ -5,13 +5,13 @@ body {
 
 /* NAV BAR*/
 .navbar{
-	    padding: 5px 30px 5px 30px !important;
+    padding: 5px 30px 5px 30px !important;
+    box-shadow: 0px -3px 11px #848484;
 }
 .nav-title{
 	color: rgba(255, 120, 0, 0.9) !important;
     font-weight: 500;
 }
-
 /* CABECALHO */
 .header-page{
 	margin-top: 20px;
@@ -20,4 +20,8 @@ body {
 /* LISTAGEM CAMPANHAS */
 .card-img-top{
 	height: 150px;
+}
+/* GOOGLE MAPS */
+#map {
+    height: 319px;
 }
