@@ -5,3 +5,7 @@ $(document).ready(function() {
 function colaborar(mensagem){
 	alert(mensagem);
 }
+
+function teste(mensagem){
+	alert(mensagem);
+}
