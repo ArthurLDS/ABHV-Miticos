@@ -1,3 +1,3 @@
 # Colabora.ai
 
-Aplicativo destinado a divulção de eventos sociais.
+Aplicativo destinado a divulgação de eventos sociais.
