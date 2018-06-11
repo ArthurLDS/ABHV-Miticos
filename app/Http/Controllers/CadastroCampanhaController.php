@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Controllers\Controller;
 
-class InstituicaoController extends Controller
+class CadastroCampanhaController extends Controller
 {
     /**
      * Show the profile for the given user.
@@ -15,6 +15,6 @@ class InstituicaoController extends Controller
      */
     public function show()
     {
-        return view('cadastro-instituicao');
+        return view('cadastro-campanha');
     }
 }

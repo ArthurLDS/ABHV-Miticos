@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -49,57 +50,68 @@
 
 	<section class="container-fluid">
 		<header class="col-md-12  header-page">
-			<h3>Cadastre aqui sua Instituição</h3>
-			<p>É só nos responder algumas perguntinhas rápidas</p>
+			<h3>
+				<i class="fa fa-calendar"></i>
+				Cadastre aqui sua Campanha
+			</h3>
+			<p>Fale um pouco sobre seu evento</p>
 			<hr/>
 			<br/>
 		</header>
-		<article class="col-md-12">
+		<article class="col-md-12" style="margin-bottom: 20px">
 			<article class="row">
-				<article class="col-md-6">
-					<h4>
-					  <i class="fas fa-info-circle"></i>
-					  Informações gerais
-					</h4>
-					<br/>
-					<div class="form-group">
-						<input type="text" name="" class="col-md-12 form-control " placeholder="Nome de sua instituição" />
-					</div>
-					<div class="form-group">
-						<select class="col-md-12 form-control" id="exampleFormControlSelect1">
-					      <option>Tipo de instituição</option>
-					      <option>2</option>
-					      <option>3</option>
-					      <option>4</option>
-					      <option>5</option>
-					    </select>
-					</div>
-					<div class="form-group">
-						<input type="number" name="" class="col-md-12 form-control" placeholder="Número de funcionários" />
-					</div>
-					<div class="form-group">
-						<textarea id="message" rows="6" class="col-md-12 form-control" name="message" placeholder="Porque você quer participar do Colabora.ai?"></textarea>
-					</div>	
-				</article>
-				<article class="col-md-6">
-					 <article class="row">
-						 <article class="col-md-12">
-						 <h4><i class="fas fa-map-marker-alt"></i> Marque no mapa a localização de sua Instituição</h4>
-						 <br/>
-						 <div id="map"></div>
-						 </article>	
-					 </article>
-				</article>	
-				<footer class="col-md-12">
-					<button class="btn btn-success">
-					 	<i class="far fa-paper-plane"></i>
-					 	Enviar para análise
-					</button>
-					<button type="reset" class="btn btn-danger">
-					 	<i class="fa fa-times"></i>
-					 	Sair
-					</button>
-				</footer>
+				<form name="formEvento" style="display: contents">
+					<article class="col-md-6">
+						<h4>
+						  <i class="fas fa-info-circle"></i>
+						  Informações gerais
+						</h4>
+						<br/>
+							<div class="form-group">
+								<input type="text" name="responsavel" required class="col-md-12 form-control " placeholder="Responsável pelo evento" />
+							</div>
+							<div class="form-group">
+								<select class="col-md-12 form-control" name="tipoEvento" required id="exampleFormControlSelect1">
+							      <option disabled selected value>Selecione uma opção </option>
+							      <option value="1">Arrecadação de alimentos</option>
+							      <option value="2">Doação de agasalhos</option>
+							      <option value="3">Arrecadação de insumos básicos em geral</option>
+							      <option value="4">Outros</option>
+							    </select>
+							</div>
+							<div class="form-group">
+								<input type="date" name="dataEvento" required class="col-md-12 form-control" placeholder="Data do evento"/>
+							</div>
+							<div class="form-group">
+								<input type="text" name="endereco" required class="col-md-12 form-control" placeholder="Endereço do evento"/>
+							</div>
+							<div class="form-group">
+								<input type="text" name="cidade" required class="col-md-12 form-control" placeholder="Cidade"/>
+							</div>
+							<div class="form-group">
+								<textarea id="message" rows="6" required class="col-md-12 form-control" name="objetivoEvento" placeholder="Qual o objetivo do seu evento?"></textarea>
+							</div>
+					</article>
+					<article class="col-md-6">
+						 <article class="row">
+							 <article class="col-md-12">
+							 <h4><i class="fas fa-map-marker-alt"></i> Visualização do local de seu evento</h4>
+							 <br/>
+							 <div id="map"></div>
+							 </article>	
+						 </article>
+					</article>	
+					<footer class="col-md-12">
+						<button class="btn btn-success" type="submit" onClick="criarEvento()">
+						 	<i class="far fa-paper-plane"></i>
+						 	Enviar para análise
+						</button>
+						<button type="reset" class="btn btn-danger">
+						 	<i class="fa fa-times"></i>
+						 	Sair
+						</button>
+					</footer>
+				</form>
 			</article>
 		</article>
 
@@ -114,11 +126,13 @@
         });
       }
     </script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6KW3myZYqjl-bYCZ6FIkLVW43f9Oq9wU&callback=initMap"
     async defer></script>
+   	<script type="text/javascript" src="js/cadastroCampanhas.js"></script>
 </body>
 </html>

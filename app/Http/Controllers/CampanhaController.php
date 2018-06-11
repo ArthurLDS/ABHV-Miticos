@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Controllers\Controller;
 use App\Product;
+use App\Campanha;
+use Illuminate\Http\Request;
 
 class CampanhaController extends Controller
 {
@@ -22,18 +25,16 @@ class CampanhaController extends Controller
         $product->price       = 1.49;
         $product->save();*/
         
-        $products = Product::orderBy('created_at', 'desc')->paginate(10);
-        return view('campanhas', ['products' => $products]);
+        $campanhas = Campanha::orderBy('created_at', 'desc')->paginate(10);
+        return view('campanhas', ['$campanhas' => $campanhas]);
     }
     
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $product = new Product;
-        $product->name        = $request->name;
-        $product->description = $request->description;
-        $product->quantity    = $request->quantity;
-        $product->price       = $request->price;
-        $product->save();
-        return redirect()->route('products.index')->with('message', 'Product created successfully!');
+        print( $request );
+        $campanha = new Campanha;
+        $campanha->fill($request->all());
+        $campanha->save();
+        return response()->json(["message" => "foiii"], 200); 
     }
 }

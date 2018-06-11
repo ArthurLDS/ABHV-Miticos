@@ -24,6 +24,8 @@ Route::get('/cadastro-instituicao', function () {
     return view('cadastro-instituicao');
 });*/
 
-Route::get('/cadastro-instituicao', 'InstituicaoController@show');
+Route::get('/cadastro-campanhas', 'CadastroCampanhaController@show');
 
 Route::get('/campanhas', 'CampanhaController@show');
+
+Route::post('/campanhas/save', 'CampanhaController@store');
