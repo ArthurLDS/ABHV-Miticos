@@ -22,7 +22,7 @@
 	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Criar campanha</a>
+	        <a class="nav-link" href="/cadastro-campanhas">Criar campanha</a>
 	      </li>
 	      <li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,13 +48,6 @@
 
 
 	<section class="container-fluid">
-		@foreach ($products as $product)
-		    <h2>{{$product->name }}</h2>
-		    <p>Descrição: {{$product->description }}</p>
-		    <p>Quantidade: {{$product->quantity }}</p>
-		    <p>Proço: {{$product->price}}</p>
-		    <hr/>
-		@endforeach
 		
 		<header class="col-md-12  header-page">
 			<h3>Capanhas</h3>
@@ -64,19 +57,23 @@
 		</header>
 		<article class="col-md-12">
 			<div class="row">
-			<article class="col-md-3">
+				
+			@foreach ($campanhas as $campanha)
+		    <article class="col-md-3" style="margin-bottom: 15px">
 				<div class="card" style="width: 18rem;">
-				  <img class="card-img-top" src="https://www.bartshealth.nhs.uk/media/images/versions/img94joktmu78931.jpg" alt="Card image cap">
+				  <img class="card-img-top" src={{$campanha->imagemBase64}} alt="Card image cap">
 				  <div class="card-body">
-				    <h5 class="card-title">Hospital de Igrejinha</h5>
-				    <p class="card-text">Arrecadação de alimentos não perecíveis e materiais de limpeza.</p>
+				    <h5 class="card-title">{{$campanha->tituloEvento}}</h5>
+				    <p class="card-text">{{$campanha->objetivoEvento}}</p>
 				    <a href="#" class="btn btn-primary">
 				    	<i class="fas fa-heart"></i>
 				    	Colaborar
 				    </a>
 				  </div>
 				</div>
-				</article>
+			</article>
+			@endforeach	
+			
 			<article class="col-md-3">
 				<div class="card" style="width: 18rem;">
 				  <img class="card-img-top" src="https://www.visto-de-investidor-eb-5.com.br/wp-content/uploads/2016/02/melhores-high-schools-dos-EUA.jpg" alt="Card image cap">

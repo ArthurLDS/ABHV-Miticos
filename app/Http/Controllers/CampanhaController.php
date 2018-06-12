@@ -25,8 +25,8 @@ class CampanhaController extends Controller
         $product->price       = 1.49;
         $product->save();*/
         
-        $campanhas = Campanha::orderBy('created_at', 'desc')->paginate(10);
-        return view('campanhas', ['$campanhas' => $campanhas]);
+        $campanhas = Campanha::orderBy('created_at', 'desc')->get();
+        return view('campanhas', ['campanhas' => $campanhas]);
     }
     
     public function store(Request $request)

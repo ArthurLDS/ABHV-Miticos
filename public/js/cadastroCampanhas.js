@@ -1,5 +1,6 @@
+var base64Image = "";
+
 $(document).ready(function() {
-    alert("AAAAAAAAAAAAAAA");
     $("[name='formEvento']").submit((e) => {
         e.preventDefault();
     })
@@ -7,32 +8,6 @@ $(document).ready(function() {
 
 function colaborar(mensagem){
 	alert(mensagem);
-}
-
-function teste(){
-    console.log("Foi");
-	    
-	var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $.ajax({
-        /* the route pointing to the post function */
-        url: 'campanhas/save',
-        type: 'POST',
-        dataType: 'JSON',
-        /* send the csrf-token and the input to the controller */
-        data: {_token: CSRF_TOKEN, 
-            responsavel: "Arthur",
-            tipoEvento: "DOS BOM",
-            dataEvento: "2018-01-01",
-            endereco: "Rua tal",
-            cidade: "Taquara",
-            objetivoEvento: "Arrecadar alimentos"
-        },
-        /* remind that 'data' is the response of the AjaxController */
-        success: function (data) { 
-            console.log(data);
-            alert("FOI");
-        }
-    }); 
 }
 
 function criarEvento(){
@@ -44,25 +19,46 @@ function criarEvento(){
             /* the route pointing to the post function */
             url: 'campanhas/save',
             type: 'POST',
-            dataType: 'JSON',
             /* send the csrf-token and the input to the controller */
             data: {_token: CSRF_TOKEN, 
+                tituloEvento: $("[name='tituloEvento']").val(),
                 responsavel: $("[name='responsavel']").val(),
+                cnpjCpf: $("[name='cnpjCpf']").val(),
+                email: $("[name='email']").val(),
                 tipoEvento:  $("[name='tipoEvento']").val(),
                 dataEvento: $("[name='dataEvento']").val(),
                 endereco: $("[name='endereco']").val(),
                 cidade: $("[name='cidade']").val(),
-                objetivoEvento: $("[name='objetivoEvento']").val()
-            },
-            /* remind that 'data' is the response of the AjaxController */
-            success: function (data) { 
-                console.log(data);
-                alert("FOI");
+                objetivoEvento: $("[name='objetivoEvento']").val(),
+                imagemBase64: base64Image
             }
-        }); 
+        }).done(function (response) { 
+            console.log("OK", response)
+            $("#alert-success").show();
+        })
+        .fail(function (response) { 
+            console.log("FAIL", response)
+            $("#alert-error").show();
+        })
     }
 }
 
+function encodeImagetoBase64(element) {
+       
+    console.log(element.files);
+    let self = this;
+    if (element.files && element.files[0]) {
+        var FR= new FileReader();
+    
+        FR.addEventListener("load", function(e) {
+          console.log(e.target.result.length);
+          self.base64Image = e.target.result;
+        }); 
+        
+        FR.readAsDataURL( element.files[0]);
+    }
+    
+}
 $("[name='cidade']").blur(function () {
     setTimeout(function () {
         let txt_raio = 1000;
@@ -73,10 +69,7 @@ $("[name='cidade']").blur(function () {
         $.getJSON(url, function (data) {
             resposta = data.results[0].geometry.location;
             initMap(txt_raio, resposta.lat, resposta.lng);
-        });
-
-        console.log(resposta);
-
+        })
     }, 500);
 });
 
@@ -103,8 +96,6 @@ function initMap(_radius, _latitude, _longitude) {
         strokeColor: '#FFF',
         strokeWeight: .9
     });
-    console.log(circle.radius);
-    
-     map.addMarker(marker);
+    map.addMarker(marker);
     //circle.bindTo('center', marker, 'position');
 }
