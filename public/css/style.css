@@ -25,3 +25,15 @@ body {
 #map {
     height: 319px;
 }
+
+.btn-orange{
+    color: #fff;
+    background-color: #ff8519;
+    border-color: #ea8022;
+}
+
+.btn-orange:hover{
+    color: #ffffff;
+    text-decoration: underline;
+    background-color: #dc7316;   
+}

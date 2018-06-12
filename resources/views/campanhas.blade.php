@@ -65,13 +65,41 @@
 				  <div class="card-body">
 				    <h5 class="card-title">{{$campanha->tituloEvento}}</h5>
 				    <p class="card-text">{{$campanha->objetivoEvento}}</p>
-				    <a href="#" class="btn btn-primary">
+				    <a href="#" class="btn btn-orange">
 				    	<i class="fas fa-heart"></i>
 				    	Colaborar
+				    </a>
+				    <a href="#" class="btn btn-primary" data-toggle="modal" data-target={{"#exampleModalLong".$campanha->id}}>
+				    	<i class="fas fa-info-circle"></i>
+				    	Detalhes
 				    </a>
 				  </div>
 				</div>
 			</article>
+			
+			<div class="modal fade" id={{"exampleModalLong".$campanha->id}} tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class=modal-title">{{$campanha->tituloEvento}}</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      	<!--<img class="card-img-top" style="width: 350px" src={{$campanha->imagemBase64}} alt="Card image cap">-->
+			        <strong>Objetivo da campanha: </strong><p class="card-text">{{$campanha->objetivoEvento}}</p>
+			        <strong>Data: </strong><p class="card-text">{{date('d/m/Y', strtotime($campanha->dataEvento))}}</p>
+			        <strong>Local: </strong><p class="card-text">{{$campanha->endereco." - ".$campanha->cidade}}</p>
+			        <strong>Responsável pela campanha: </strong><p class="card-text">{{$campanha->responsavel}}</p>
+			        <strong>E-mail do responsável: </strong><p class="card-text">{{$campanha->email}}</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 			@endforeach	
 			
 			<article class="col-md-3">
